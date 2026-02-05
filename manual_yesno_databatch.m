@@ -63,7 +63,7 @@ for i_session = 1:size(file_dir_all,1)
     else
         wavesurfer_fs = 20000;
     end
-    obj = YesNoDiscriminationCIBRData(solo_filename, [], wavesurfer_fs); % protocol type 4/5  调用同路径函数而不是+Solo
+    obj = Solo.YesNoDiscriminationCIBRData(solo_filename, [], wavesurfer_fs); % protocol type 4/5  调用+Solo内
     % obj.Session_Name_Tag(session_tagname);
     save([output_dir,output_filename,'_behavior.mat'],'obj','-v7.3');
     
