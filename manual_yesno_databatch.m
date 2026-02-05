@@ -59,7 +59,7 @@ for i_session = 1:size(file_dir_all,1)
     disp(['............ ',animal_name,'  ',date_name,' ...............']);
     % construct the behavioral data object
     if strcmp(date_name, "20260203_1")
-        wavesurfer_fs = 30003;  % 只有这个session更改了ws采样率
+        wavesurfer_fs = 30000;  % 只有这个session更改了ws采样率
     else
         wavesurfer_fs = 20000;
     end
@@ -113,4 +113,5 @@ for i_session = 1:size(file_dir_all,1)
     obj.units{2}=Units;
 
     save([output_dir,output_filename,'_allData.mat'],'obj','-v7.3');
+
 end
