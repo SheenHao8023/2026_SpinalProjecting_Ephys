@@ -75,22 +75,30 @@ for k=1:length(Datapath)
 
                 if max(chMap)<=32
                 % CB64=2x32
-                    fs=20000;
+                    fs=round(1/median(diff(Trial_time_all(1,:))));
                     gwfparams.nCh = 32;                      % Number of channels that were streamed to disk in .dat file
-                    gwfparams.wfWin = [-10 29];              % Number of samples before and after spiketime to include in waveform %[-10 29] for CB64  [-15 44] for NP 30K fs
+                    if fs==20000
+                        gwfparams.wfWin = [-10 29];              % Number of samples before and after spiketime to include in waveform %[-10 29] for CB64  [-15 44] for NP 30K fs
+                    else
+                        gwfparams.wfWin = [-15 44];
+                    end                    
                     gwfparams.nWf = 10000;                    % Number of waveforms per unit to pull out
                 else
                     % NP384
-                    fs=30000;
+                    fs=round(1/median(diff(Trial_time_all(1,:))));
                     gwfparams.nCh = 384;                     % Number of channels that were streamed to disk in .dat file
-                    gwfparams.wfWin = [-15 44];              % Number of samples before and after spiketime to include in waveform %[-10 29] for CB64  [-15 44] for NP 30K fs
+                    if fs==20000
+                        gwfparams.wfWin = [-10 29];              % Number of samples before and after spiketime to include in waveform %[-10 29] for CB64  [-15 44] for NP 30K fs
+                    else
+                        gwfparams.wfWin = [-15 44];
+                    end
                     gwfparams.nWf =1000;                    % Number of waveforms per unit to pull out
                 end
 
                 gwfparams.spikeTimes = spike_sample_time_good; % Vector of cluster spike times (in samples) same length as .spikeClusters
                 gwfparams.spikeClusters = spike_clusters_good; % Vector of cluster IDs (Phy nomenclature)   same length as .spikeTimes
                 
-                % 修改getWaveForms内部 chMap使序号从1开始，见local func
+                % 若需要修改getWaveForms内部 chMap使序号从1开始，见local func
                 wf = getWaveForms(gwfparams);
                 
                 figure;
