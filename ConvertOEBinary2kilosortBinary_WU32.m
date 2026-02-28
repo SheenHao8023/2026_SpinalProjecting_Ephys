@@ -47,12 +47,12 @@ for k = 1:length(datapath)
             end
         end
     end
-    func_process_voltage_traces_kilosort_WuElectrode(file_dir, probe, shank, mmapN);
+    func_process_voltage_traces_kilosort_WU32(file_dir, probe, shank, mmapN);
     % master_kilosort_WuElectrode; 
 end
 
-%% Local func: func_process_voltage_traces_kilosort_WuElectrode
-function func_process_voltage_traces_kilosort_WuElectrode(file_dir, probe, shank, mmapN)
+%% Local func: func_process_voltage_traces_kilosort_WU32
+function func_process_voltage_traces_kilosort_WU32(file_dir, probe, shank, mmapN)
     oebin_file = dir(fullfile(file_dir, '**', 'structure.oebin'));
     oebin_path = fullfile(oebin_file(1).folder, oebin_file(1).name);
     D = load_open_ephys_binary(oebin_path, 'continuous', mmapN, 'mmap');
@@ -216,4 +216,5 @@ function func_process_voltage_traces_kilosort_WuElectrode(file_dir, probe, shank
         end
     end
 return
+
 end
